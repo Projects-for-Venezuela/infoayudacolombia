@@ -1,0 +1,150 @@
+{
+  "centros_acopio": [
+    {
+      "estado": "Bogotá D.C.",
+      "ciudad": "Bogotá",
+      "centros": [
+        { "nombre": "Cruz Roja Colombiana - Sede Nacional", "direccion": "Av. Cra. 68 Nº 68B-31", "hora": "8:00 AM a 6:00 PM", "acepta": ["agua potable", "alimentos no perecederos", "medicamentos", "insumos médicos"], "contacto": "Cruz Roja Bogotá" },
+        { "nombre": "Defensa Civil Colombiana - Distrito Capital", "direccion": "Sede operativa Distrito Capital", "hora": "24 horas", "acepta": ["agua potable", "alimentos", "ropa", "cobijas", "herramientas"] },
+        { "nombre": "Estadio El Campín - Punto de acopio", "direccion": "Cra. 30 Nº 57-60, acceso norte", "hora": "9:00 AM a 5:00 PM", "acepta": ["agua potable", "alimentos no perecederos", "caritas", "pañales"] }
+      ]
+    },
+    {
+      "estado": "Chocó",
+      "ciudad": "Quibdó",
+      "centros": [
+        { "nombre": "Alcaldía de Quibdó - Punto de acopio", "direccion": "Palacio Municipal de Quibdó", "hora": "8:00 AM a 6:00 PM", "acepta": ["agua potable", "alimentos no perecederos", "medicamentos", "caritas", "lonas", "cobijas"] },
+        { "nombre": "Iglesia Catedral San Francisco de Asís", "direccion": "Cra. 2 con Calle 21, Quibdó", "hora": "9:00 AM a 5:00 PM", "acepta": ["agua potable", "alimentos", "ropa en buen estado", "cobijas", "pañales"] }
+      ]
+    },
+    {
+      "estado": "Chocó",
+      "ciudad": "San José del Palmar",
+      "centros": [
+        { "nombre": "Casa de Gobierno Municipal", "direccion": "Casco urbano de San José del Palmar", "hora": "8:00 AM a 6:00 PM", "acepta": ["agua potable", "alimentos no perecederos", "medicamentos", "primeros auxilios"] }
+      ]
+    },
+    {
+      "estado": "Caldas",
+      "ciudad": "Manizales",
+      "centros": [
+        { "nombre": "Defensa Civil Caldas - Sede Manizales", "direccion": "Carrera 23 con Calle 12", "hora": "24 horas", "acepta": ["agua potable", "alimentos", "medicamentos", "herramientas", "cobijas"] },
+        { "nombre": "Bomberos Manizales", "direccion": "Sede central Bomberos Manizales", "hora": "24 horas", "acepta": ["agua potable", "alimentos no perecederos", "kit de primeros auxilios"] },
+        { "nombre": "Universidad de Caldas - Punto de acopio", "direccion": "Sede Palogrande", "hora": "9:00 AM a 5:00 PM", "acepta": ["ropa", "cobijas", "pañales", "alimentos no perecederos", "agua potable"] }
+      ]
+    },
+    {
+      "estado": "Risaralda",
+      "ciudad": "Pereira",
+      "centros": [
+        { "nombre": "Defensa Civil Risaralda - Sede Pereira", "direccion": "Av. de las Américas con Cra. 13", "hora": "24 horas", "acepta": ["agua potable", "alimentos", "medicamentos", "herramientas", "lonas"] },
+        { "nombre": "Iglesia Catedral Nuestra Señora de la Pobreza", "direccion": "Plaza de Bolívar, Pereira", "hora": "9:00 AM a 5:00 PM", "acepta": ["agua potable", "alimentos no perecederos", "ropa", "cobijas"] },
+        { "nombre": "Cruz Roja Risaralda", "direccion": "Sede seccional Pereira", "hora": "8:00 AM a 6:00 PM", "acepta": ["agua potable", "insumos médicos", "medicamentos", "alimentos no perecederos"] }
+      ]
+    },
+    {
+      "estado": "Quindío",
+      "ciudad": "Armenia",
+      "centros": [
+        { "nombre": "Defensa Civil Quindío - Sede Armenia", "direccion": "Cra. 14 con Calle 20", "hora": "24 horas", "acepta": ["agua potable", "alimentos no perecederos", "medicamentos", "cobijas"] },
+        { "nombre": "Bomberos Armenia", "direccion": "Sede central Bomberos Armenia", "hora": "24 horas", "acepta": ["agua potable", "alimentos", "kit de primeros auxilios"] },
+        { "nombre": "Centro Administrativo Departamental del Quindío", "direccion": "Sede de la Gobernación", "hora": "8:00 AM a 5:00 PM", "acepta": ["alimentos no perecederos", "agua potable", "ropa", "pañales"] }
+      ]
+    },
+    {
+      "estado": "Cauca",
+      "ciudad": "Popayán",
+      "centros": [
+        { "nombre": "Defensa Civil Cauca - Sede Popayán", "direccion": "Cra. 7 con Calle 5", "hora": "24 horas", "acepta": ["agua potable", "alimentos", "medicamentos", "herramientas", "lonas"] },
+        { "nombre": "Bomberos Popayán", "direccion": "Sede central Bomberos Popayán", "hora": "24 horas", "acepta": ["agua potable", "alimentos no perecederos", "insumos médicos"] },
+        { "nombre": "Iglesia Catedral Basílica Nuestra Señora de la Asunción", "direccion": "Parque Caldas, Popayán", "hora": "9:00 AM a 5:00 PM", "acepta": ["agua potable", "alimentos no perecederos", "ropa", "cobijas", "pañales"] }
+      ]
+    },
+    {
+      "estado": "Valle del Cauca",
+      "ciudad": "Cali",
+      "centros": [
+        { "nombre": "Defensa Civil Valle - Sede Cali", "direccion": "Av. 3N Nº 25-60", "hora": "24 horas", "acepta": ["agua potable", "alimentos no perecederos", "medicamentos", "herramientas", "cobijas"] },
+        { "nombre": "Cruz Roja Colombiana - Seccional Valle", "direccion": "Calzada Del Terminal, Cali", "hora": "8:00 AM a 6:00 PM", "acepta": ["agua potable", "insumos médicos", "medicamentos", "alimentos no perecederos"] },
+        { "nombre": "Estadio Olímpico Pascual Guerrero", "direccion": "Cra. 36 Nº 5B-11", "hora": "9:00 AM a 5:00 PM", "acepta": ["alimentos no perecederos", "agua potable", "pañales", "ropa"] }
+      ]
+    },
+    {
+      "estado": "Valle del Cauca",
+      "ciudad": "Buenaventura",
+      "centros": [
+        { "nombre": "Alcaldía de Buenaventura - Punto de acopio", "direccion": "Palacio Municipal de Buenaventura", "hora": "8:00 AM a 6:00 PM", "acepta": ["agua potable", "alimentos no perecederos", "medicamentos", "cobijas"] }
+      ]
+    },
+    {
+      "estado": "Antioquia",
+      "ciudad": "Medellín",
+      "centros": [
+        { "nombre": "Defensa Civil Antioquia - Sede Medellín", "direccion": "Cra. 55 Nº 49-51", "hora": "24 horas", "acepta": ["agua potable", "alimentos", "medicamentos", "herramientas", "cobijas"] },
+        { "nombre": "Cruz Roja Antioquia - Seccional Medellín", "direccion": "Av. 33 Nº 55-04", "hora": "8:00 AM a 6:00 PM", "acepta": ["agua potable", "insumos médicos", "medicamentos", "alimentos no perecederos"] }
+      ]
+    },
+    {
+      "estado": "Cundinamarca",
+      "ciudad": "Soacha",
+      "centros": [
+        { "nombre": "Defensa Civil Cundinamarca - Sede Soacha", "direccion": "Sede operativa Soacha", "hora": "24 horas", "acepta": ["agua potable", "alimentos no perecederos", "ropa", "cobijas", "pañales"] }
+      ]
+    },
+    {
+      "estado": "Santander",
+      "ciudad": "Bucaramanga",
+      "centros": [
+        { "nombre": "Defensa Civil Santander - Sede Bucaramanga", "direccion": "Cra. 15 Nº 34-20", "hora": "24 horas", "acepta": ["agua potable", "alimentos no perecederos", "medicamentos", "cobijas"] }
+      ]
+    },
+    {
+      "estado": "Tolima",
+      "ciudad": "Ibagué",
+      "centros": [
+        { "nombre": "Defensa Civil Tolima - Sede Ibagué", "direccion": "Cra. 3 con Calle 19", "hora": "24 horas", "acepta": ["agua potable", "alimentos no perecederos", "medicamentos", "ropa"] }
+      ]
+    },
+    {
+      "estado": "Meta",
+      "ciudad": "Villavicencio",
+      "centros": [
+        { "nombre": "Defensa Civil Meta - Sede Villavicencio", "direccion": "Cra. 30 Nº 40-05", "hora": "24 horas", "acepta": ["agua potable", "alimentos no perecederos", "medicamentos", "cobijas"] }
+      ]
+    },
+    {
+      "estado": "Nariño",
+      "ciudad": "Pasto",
+      "centros": [
+        { "nombre": "Defensa Civil Nariño - Sede Pasto", "direccion": "Cra. 25 con Calle 18", "hora": "24 horas", "acepta": ["agua potable", "alimentos no perecederos", "medicamentos", "ropa"] }
+      ]
+    },
+    {
+      "estado": "La Guajira",
+      "ciudad": "Riohacha",
+      "centros": [
+        { "nombre": "Defensa Civil La Guajira - Sede Riohacha", "direccion": "Cra. 7 Nº 10-20", "hora": "24 horas", "acepta": ["agua potable", "alimentos no perecederos", "pañales", "cobijas"] }
+      ]
+    },
+    {
+      "estado": "Internacional",
+      "ciudad": "Miami, EE. UU.",
+      "centros": [
+        { "nombre": "Defensa Civil Colombiana - Capítulo Miami", "direccion": "Doral, Miami FL", "hora": "24 horas", "acepta": ["agua potable", "alimentos no perecederos", "medicamentos", "insumos médicos"], "contacto": "Comunidad colombiana en Miami", "zelle": "donaciones@ejemplo.com" }
+      ]
+    }
+  ],
+  "insumos_generales_aceptados": [
+    "Alimentos no perecederos",
+    "Agua potable",
+    "Baterías / pilas",
+    "Medicamentos",
+    "Insumos médicos",
+    "Gasas, alcohol, algodón, jeringas",
+    "Ropa en buen estado / abrigos / cobijas",
+    "Linternas",
+    "Herramientas (martillos, palas, picos, cinceles, seguetas)",
+    "Equipos de seguridad (cascos, guantes, lentes, cuerdas)",
+    "Pañales y fórmulas infantiles"
+  ]
+}

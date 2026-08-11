@@ -1,0 +1,39 @@
+{
+  "telefonos_emergencia": {
+    "numeros_nacionales": [
+      { "servicio": "Línea única de emergencias (NUSE)", "numero": "123" },
+      { "servicio": "Policía Nacional", "numero": "112" },
+      { "servicio": "Bomberos", "numero": "119" },
+      { "servicio": "Cruz Roja Colombiana", "numero": "132" },
+      { "servicio": "Defensa Civil Colombiana", "numero": "144" },
+      { "servicio": "Gestión del Riesgo / UNGRD", "numero": "01 8000 9 51 30" }
+    ],
+    "bogota": {
+      "bomberos": [
+        { "nombre": "Bomberos Bogotá - Estación Norte", "telefono": "(601) 382 2500" },
+        { "nombre": "Bomberos Bogotá - Estación Centro", "telefono": "(601) 382 2500" },
+        { "nombre": "Bomberos Bogotá - Estación Chapinero", "telefono": "(601) 382 2500" },
+        { "nombre": "Bomberos Bogotá - Estación Restrepo", "telefono": "(601) 382 2500" },
+        { "nombre": "Bomberos Bogotá - Estación Kennedy", "telefono": "(601) 382 2500" },
+        { "nombre": "Bomberos Bogotá - Estación Bosa", "telefono": "(601) 382 2500" },
+        { "nombre": "Bomberos Bogotá - Estación Usaquén", "telefono": "(601) 382 2500" },
+        { "nombre": "Bomberos Bogotá - Estación Suba", "telefono": "(601) 382 2500" }
+      ],
+      "proteccion_civil": [
+        { "nombre": "Defensa Civil Colombiana - Bogotá", "telefono": "(601) 288 6041" },
+        { "nombre": "Oficina de Gestión del Riesgo Bogotá (IDIGER)", "telefono": "(601) 429 7414" }
+      ],
+      "rescate": [
+        { "nombre": "Cruz Roja Colombiana - Seccional Bogotá", "telefono": "(601) 437 8888" },
+        { "nombre": "Grupo de Rescate de Emergencias (GREM)", "telefono": "(601) 288 6064" },
+        { "nombre": "Brigada de Emergencias Bogotá", "telefono": "(601) 311 4229" }
+      ],
+      "policia": [
+        { "nombre": "Policía Metropolitana de Bogotá (MEBOG)", "telefono": "112" },
+        { "nombre": "Policía - Línea Antisecuestro", "telefono": "165" },
+        { "nombre": "Policía de Tránsito Bogotá", "telefono": "767" }
+      ],
+      "radio_informacion": ["88.9 FM", "90.4 FM", "93.1 FM", "101.9 FM"]
+    }
+  }
+}

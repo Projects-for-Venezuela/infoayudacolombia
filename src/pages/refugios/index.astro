@@ -1,0 +1,298 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import AlertBox from "../../components/sections/AlertBox.astro";
+import SearchFilters from "../../components/widgets/SearchFilters.astro";
+import EmergenciaCTA from "../../components/sections/EmergenciaCTA.astro";
+import SugerirRefugioModal from "../../components/modals/SugerirRefugioModal.astro";
+import ReportarRefugiadoModal from "../../components/modals/ReportarRefugiadoModal.astro";
+---
+
+<Layout title="Refugios" showHero={false}>
+  <header class="relative -mt-4 md:-mt-6 mb-6 w-screen ml-[calc(-50vw+50%)] overflow-hidden bg-gradient-to-br from-[#1E3A5F] via-[#1D4ED8] to-[#3B82F6] text-white">
+    <div class="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_20px,rgba(255,255,255,0.03)_20px,rgba(255,255,255,0.03)_40px)]" aria-hidden="true"></div>
+    <div class="relative max-w-[640px] mx-auto text-center px-5 py-10 sm:py-12">
+      <span class="inline-block bg-white/20 border border-white/25 text-white text-[0.7rem] font-extrabold uppercase tracking-[0.06em] px-3 py-1 rounded-full mb-4">Seguro</span>
+      <h1 class="text-2xl sm:text-[1.9rem] font-extrabold tracking-tight leading-tight text-balance mb-2">
+        <span class="text-[#93C5FD]">Refugios</span> Verificados
+      </h1>
+      <p class="text-sm sm:text-[0.9rem] text-white/85 max-w-[480px] mx-auto leading-relaxed text-balance">
+        Encuentra refugios y espacios seguros habilitados para las personas afectadas — <strong class="text-white font-semibold">actualizado por la comunidad</strong>
+      </p>
+    </div>
+  </header>
+
+  <div class="flex items-center gap-2.5 mb-5 px-4 py-3 rounded-xl bg-[#EFF6FF] border border-[#BFDBFE] text-[0.84rem] text-[#1E40AF] leading-relaxed">
+    <svg class="shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+    <span><strong class="font-semibold">Si estás en una zona afectada,</strong> localiza el refugio más cercano. Si conoces un refugio activo, <button id="btnSugerirRefugio" type="button" class="bg-transparent border-0 p-0 text-[#1E40AF] underline cursor-pointer font-semibold">sugiere agregarlo aquí</button>.</span>
+  </div>
+
+  <AlertBox />
+
+  <div class="grid grid-cols-2 gap-3 mb-5">
+    <div class="bg-white border border-border rounded-xl p-3.5 text-center">
+      <span class="block text-[1.6rem] font-extrabold text-[#1D4ED8] leading-tight tabular-nums" id="statRefugios">0</span>
+      <span class="block text-[0.72rem] text-muted font-semibold uppercase tracking-wide mt-0.5">Refugios Activos</span>
+    </div>
+    <div class="bg-white border border-border rounded-xl p-3.5 text-center">
+      <span class="block text-[1.6rem] font-extrabold text-[#1D4ED8] leading-tight tabular-nums" id="statCiudades">0</span>
+      <span class="block text-[0.72rem] text-muted font-semibold uppercase tracking-wide mt-0.5">Ciudades con Refugios</span>
+    </div>
+  </div>
+
+  <div class="flex gap-2 flex-wrap mb-4">
+    <a href="/buscar-personas" class="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-11 rounded-lg text-[0.85rem] font-semibold bg-white text-text border border-border no-underline transition-colors duration-150 hover:bg-[#F1F5F9] hover:border-[#CBD5E1]">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      Buscar Personas
+    </a>
+    <button id="btnReportarRefugiado" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 min-h-11 rounded-lg text-[0.85rem] font-semibold bg-blue text-white border border-transparent cursor-pointer transition-colors duration-150 hover:bg-blue-dark">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+      Registrar Persona en Refugio
+    </button>
+  </div>
+
+  <SearchFilters />
+
+  <div class="flex items-center gap-2 mb-3 pb-2 border-b border-border">
+    <h2 id="gridTitle" class="text-[0.95rem] font-bold text-text tracking-tight">Departamentos con refugios</h2>
+    <span id="resultsCount" class="text-[0.72rem] font-semibold text-muted bg-[#F1F5F9] px-2 py-0.5 rounded-full border border-border tabular-nums" style="display: none;"></span>
+    <span id="dbStatus" class="ml-auto text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide inline-flex items-center gap-1 bg-[#E2E8F0] text-[#64748B]">Cargando...</span>
+  </div>
+
+  <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(260px,1fr))] items-start mb-8" id="mainGrid">
+    <div class="col-span-full bg-white border border-border rounded-xl p-10 text-center text-muted text-sm">Cargando refugios desde la base de datos...</div>
+  </div>
+
+  <EmergenciaCTA />
+
+  <div class="mt-6 text-center">
+    <a href="/" class="inline-flex items-center gap-1.5 text-sm font-medium text-muted no-underline px-4 py-2 rounded-lg transition-colors duration-150 hover:bg-[#F1F5F9] hover:text-text">&larr; Volver al inicio</a>
+  </div>
+
+  <SugerirRefugioModal />
+  <ReportarRefugiadoModal />
+</Layout>
+
+<script>
+  import { supabase } from "../../lib/supabase";
+  import { ZONAS_AFECTADAS } from "../../data/centros";
+  import { escapeHtml, escapeArray } from "../../lib/escape";
+
+  let refugios: any[] = [];
+
+  const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+  const citySelect = document.getElementById('citySelect') as HTMLSelectElement;
+  const typeSelect = document.getElementById('typeSelect') as HTMLSelectElement;
+  const mainGrid = document.getElementById('mainGrid') as HTMLElement;
+  const gridTitle = document.getElementById('gridTitle') as HTMLElement;
+  const resultsCount = document.getElementById('resultsCount') as HTMLElement;
+  const dbStatus = document.getElementById('dbStatus') as HTMLElement;
+  const statRefugios = document.getElementById('statRefugios') as HTMLElement;
+  const statCiudades = document.getElementById('statCiudades') as HTMLElement;
+
+  const GRID_ESTADOS = "grid gap-4 grid-cols-[repeat(auto-fill,minmax(260px,1fr))] items-start mb-8";
+  const GRID_REFUGIOS = "grid gap-4 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] items-start mb-8";
+  const NO_RESULTS = "col-span-full bg-white border border-border rounded-xl p-10 text-center text-muted text-sm";
+  const SB_BASE = "ml-auto text-xs font-bold px-2 py-0.5 rounded-full uppercase tracking-wide inline-flex items-center gap-1";
+  const SB = {
+    loading: `${SB_BASE} bg-[#E2E8F0] text-[#64748B]`,
+    live: `${SB_BASE} bg-[#DCFCE7] text-[#15803D] border border-[#BBF7D0]`,
+    offline: `${SB_BASE} bg-[#FEF3C7] text-[#D97706] border border-[#FDE68A]`,
+  };
+  const LBL = "text-[0.68rem] font-semibold text-muted uppercase tracking-wide min-w-[64px] shrink-0 pt-0.5";
+  const VAL = "text-sm text-text flex-1 leading-relaxed min-w-0 wrap-break-word";
+  const TAG_YELLOW = "inline-block text-xs px-2.5 py-1 rounded-full border font-medium bg-[#FFFBEB] text-amber border-[#FDE68A]";
+  const TAG_RED = "inline-block text-xs px-2.5 py-1 rounded-full border font-medium bg-[#FEF2F2] text-red border-[#FECACA]";
+  const row = (label: string, value: string) => `<div class="flex gap-2 items-start"><span class="${LBL}">${label}</span><div class="${VAL}">${value}</div></div>`;
+
+  function initCitySelect() {
+    const citiesSet = new Set(refugios.map((c: any) => c.ciudad));
+    const uniqueCities = Array.from(citiesSet) as string[];
+    const affectedCities: string[] = [];
+    const otherCities: string[] = [];
+
+    uniqueCities.forEach((city: string) => {
+      const sample = refugios.find((c: any) => c.ciudad === city);
+      if (sample && ZONAS_AFECTADAS.includes(sample.estado)) {
+        affectedCities.push(city);
+      } else {
+        otherCities.push(city);
+      }
+    });
+
+    affectedCities.sort();
+    otherCities.sort();
+
+    citySelect.innerHTML = '<option value="">Todas las ciudades</option>';
+
+    if (affectedCities.length > 0) {
+      const optGroupAffected = document.createElement('optgroup');
+      optGroupAffected.label = '🔴 Zonas Afectadas';
+      affectedCities.forEach((city: string) => {
+        const opt = document.createElement('option');
+        opt.value = city;
+        opt.textContent = `🔴 ${city}`;
+        optGroupAffected.appendChild(opt);
+      });
+      citySelect.appendChild(optGroupAffected);
+    }
+
+    if (otherCities.length > 0) {
+      const optGroupOther = document.createElement('optgroup');
+      optGroupOther.label = 'Otras ciudades';
+      otherCities.forEach((city: string) => {
+        const opt = document.createElement('option');
+        opt.value = city;
+        opt.textContent = city;
+        optGroupOther.appendChild(opt);
+      });
+      citySelect.appendChild(optGroupOther);
+    }
+  }
+
+  function renderRefugios(filtered: any[]) {
+    gridTitle.textContent = "Refugios encontrados";
+    resultsCount.textContent = `${filtered.length} resultado${filtered.length !== 1 ? 's' : ''}`;
+    resultsCount.style.display = "inline-block";
+    mainGrid.className = GRID_REFUGIOS;
+
+    if (filtered.length === 0) {
+      mainGrid.innerHTML = `<div class="${NO_RESULTS}">No se encontraron refugios que coincidan con los criterios.</div>`;
+      return;
+    }
+
+    const estadosAyudaMap: Map<string, string> = (window as any).estadosAyudaMap || new Map();
+
+    mainGrid.innerHTML = filtered.map((c: any) => {
+      const dbStatus = estadosAyudaMap.get(c.estado);
+      const status = dbStatus || (ZONAS_AFECTADAS.includes(c.estado) ? 'critico' : null);
+      const isAfectado = status === 'critico';
+
+      const safeNombre = escapeHtml(c.nombre);
+      const safeCiudad = escapeHtml(c.ciudad);
+      const safeEstado = escapeHtml(c.estado);
+      const safeDireccion = escapeHtml(c.direccion);
+      const safeContacto = escapeHtml(c.contacto);
+      const safeCapacidad = escapeHtml(c.capacidad);
+      const safeAcepta = escapeArray(c.acepta);
+      const safeNecesitan = escapeArray(c.necesitan);
+
+      const aceptaHtml = safeAcepta.length
+        ? row('Aceptan', `<div class="flex flex-wrap gap-1">${safeAcepta.map((a: string) => `<span class="${TAG_YELLOW}">${a}</span>`).join("")}</div>`)
+        : '';
+      const necesitanHtml = safeNecesitan.length
+        ? row('Urgente', `<div class="flex flex-wrap gap-1">${safeNecesitan.map((n: string) => `<span class="${TAG_RED}">${n}</span>`).join("")}</div>`)
+        : '';
+
+      const badges: string[] = [];
+      if (status === 'critico') badges.push('<span class="inline-flex items-center gap-1 bg-red text-white text-[0.6rem] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded shrink-0"><svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/></svg>Crítico</span>');
+      else if (status === 'en_camino') badges.push('<span class="inline-flex items-center gap-1 bg-yellow text-blue-dark text-[0.6rem] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded shrink-0"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>En camino</span>');
+      if (c.tipo === 'privado') badges.push('<span class="inline-flex items-center gap-1 bg-[#DBEAFE] text-[#1E40AF] border border-[#BFDBFE] text-[0.6rem] font-bold uppercase tracking-wide px-1.5 py-0.5 rounded shrink-0"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Casa Particular</span>');
+      const badgesHtml = badges.length ? `<div class="flex flex-col items-end gap-1 shrink-0">${badges.join("")}</div>` : '';
+
+      const iconBg = isAfectado ? 'bg-red' : 'bg-blue';
+
+      return `
+        <div class="flex flex-col bg-white border ${isAfectado ? 'border-[#FCA5A5] bg-[#FFFAFA]' : 'border-border'} rounded-xl overflow-hidden transition-[box-shadow,border-color] duration-150 hover:shadow-md hover:border-[#C7CDD8]">
+          <div class="flex items-center gap-2.5 pt-3.5 px-4">
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${iconBg}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </div>
+            <div class="flex flex-col flex-1 min-w-0">
+              <h3 class="text-sm font-bold tracking-tight text-text leading-snug">${safeNombre}</h3>
+              <span class="text-xs text-muted font-medium truncate">${safeCiudad}, ${safeEstado}</span>
+            </div>
+            ${badgesHtml}
+          </div>
+          <div class="px-4 pt-2.5 pb-3.5 flex flex-col gap-1.5">
+            ${c.direccion ? row('Dirección', safeDireccion) : ''}
+            ${c.contacto ? row('Contacto', safeContacto) : ''}
+            ${c.capacidad ? row('Capacidad', safeCapacidad) : ''}
+            ${aceptaHtml}${necesitanHtml}
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function handleFilter() {
+    const q = searchInput.value.toLowerCase().trim();
+    const city = citySelect.value;
+    const type = typeSelect ? typeSelect.value : "";
+    if (!q && !city && !type) {
+      renderRefugios(refugios);
+      return;
+    }
+
+    let filtered = refugios.filter((c: any) => {
+      if (city && c.ciudad !== city) return false;
+      const cType = c.tipo === 'privado' ? 'privado' : 'oficial';
+      if (type && cType !== type) return false;
+      if (q) {
+        return c.nombre.toLowerCase().includes(q) || c.ciudad.toLowerCase().includes(q)
+          || c.estado.toLowerCase().includes(q) || (c.direccion || '').toLowerCase().includes(q)
+          || (c.acepta || []).some((a: string) => a.toLowerCase().includes(q))
+          || (c.necesitan || []).some((n: string) => n.toLowerCase().includes(q));
+      }
+      return true;
+    });
+
+    renderRefugios(filtered);
+  }
+
+  function updateStats() {
+    statRefugios.textContent = refugios.length.toString();
+    statCiudades.textContent = new Set(refugios.map((c: any) => c.ciudad)).size.toString();
+  }
+
+  async function loadData() {
+    try {
+      dbStatus.textContent = "Conectando...";
+      dbStatus.className = SB.loading;
+      if (!supabase) throw new Error("Supabase client not initialized");
+
+      const { data, error } = await supabase.from('refugios').select('*').eq('verificado', true);
+      if (error) throw error;
+
+      if (data) {
+        const { data: statusData, error: statusError } = await supabase
+          .from('estados_ayuda')
+          .select('*');
+
+        if (!statusError && statusData) {
+          const map = new Map<string, string>();
+          statusData.forEach(s => map.set(s.estado, s.nivel_ayuda));
+          (window as any).estadosAyudaMap = map;
+        } else {
+          (window as any).estadosAyudaMap = new Map();
+        }
+
+        refugios = data.sort((a, b) => {
+          const dbStatusA = (window as any).estadosAyudaMap?.get(a.estado);
+          const dbStatusB = (window as any).estadosAyudaMap?.get(b.estado);
+          const aAfectado = dbStatusA === 'critico' || (!dbStatusA && ZONAS_AFECTADAS.includes(a.estado));
+          const bAfectado = dbStatusB === 'critico' || (!dbStatusB && ZONAS_AFECTADAS.includes(b.estado));
+          if (aAfectado && !bAfectado) return -1;
+          if (!aAfectado && bAfectado) return 1;
+          return a.estado.localeCompare(b.estado);
+        });
+        updateStats();
+        initCitySelect();
+        handleFilter();
+        dbStatus.textContent = "En Vivo";
+        dbStatus.className = SB.live;
+      }
+    } catch (err) {
+      console.error("Supabase connection failed:", err);
+      dbStatus.textContent = "Error";
+      dbStatus.className = SB.offline;
+      mainGrid.innerHTML = `<div class="${NO_RESULTS}">Hubo un error cargando los refugios.</div>`;
+    }
+  }
+
+  searchInput.addEventListener('input', handleFilter);
+  citySelect.addEventListener('change', handleFilter);
+  if (typeSelect) typeSelect.addEventListener('change', handleFilter);
+
+  loadData();
+  setInterval(loadData, 300000);
+</script>
