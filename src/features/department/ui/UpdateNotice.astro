@@ -1,0 +1,36 @@
+---
+import { IconClock } from '@tabler/icons-astro'
+
+interface Props {
+  update: string
+}
+
+const { update } = Astro.props
+---
+
+<section class="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+  <div class="rounded-2xl border border-yellow-200 bg-yellow-50 p-5 sm:p-6">
+    <div class="flex gap-4">
+      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-yellow-100">
+        <IconClock size={20} class="text-yellow-700" />
+      </div>
+
+      <div class="min-w-0">
+        <h2 class="font-black text-slate-950">Información en actualización</h2>
+
+        <p class="mt-1 text-sm leading-6 text-slate-600">
+          Los balances de personas afectadas, fallecidos, heridos y daños pueden cambiar mientras
+          avanzan las labores de búsqueda, rescate y evaluación de las autoridades.
+        </p>
+
+        <div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+          <span class="font-bold text-yellow-800"> Última actualización: </span>
+
+          <span class="text-yellow-700">
+            {update}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

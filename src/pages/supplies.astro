@@ -1,0 +1,25 @@
+---
+import Layout from '~/layouts/Layout.astro'
+
+import { categories, donationTips } from '~/data/supplies'
+import SuppliesHero from '~/features/supplies/ui/SuppliesHero.astro'
+import SupplyCategories from '~/features/supplies/ui/SupplyCategories.astro'
+import DonationTips from '~/features/supplies/ui/DonationTips.astro'
+import DonationCallout from '~/features/supplies/ui/DonationCallout.astro'
+---
+
+<Layout
+  title="Guía de insumos | Info Ayuda Colombia"
+  description="Guía de insumos y elementos que pueden ser solicitados para apoyar a las comunidades afectadas."
+  canonical="https://infoayudacolombia.vercel.app/supplies"
+>
+  <main>
+    <SuppliesHero />
+
+    <SupplyCategories categories={categories} />
+
+    <DonationTips tips={donationTips} />
+
+    <DonationCallout />
+  </main>
+</Layout>

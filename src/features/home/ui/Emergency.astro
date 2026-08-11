@@ -1,0 +1,96 @@
+---
+import { IconAmbulance, IconFlame, IconPhone, IconShieldCheck } from '@tabler/icons-astro'
+
+const emergencies = [
+  {
+    name: 'Línea única de emergencias',
+    number: '123',
+    description: 'Policía, bomberos, ambulancias y atención de emergencias.',
+    icon: IconShieldCheck,
+  },
+  {
+    name: 'Bomberos',
+    number: '119',
+    description: 'Incendios, rescates y otras emergencias.',
+    icon: IconFlame,
+  },
+  {
+    name: 'Cruz Roja',
+    number: '132',
+    description: 'Atención y asistencia humanitaria.',
+    icon: IconAmbulance,
+  },
+  {
+    name: 'Defensa Civil',
+    number: '144',
+    description: 'Emergencias y apoyo en gestión del riesgo.',
+    icon: IconShieldCheck,
+  },
+]
+---
+
+<section aria-labelledby="emergency-title" class="w-full">
+  <div class="rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-6">
+    <!-- Encabezado -->
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="h-2 w-2 rounded-full bg-colombia-red" aria-hidden="true"></span>
+
+          <p class="text-xs font-bold uppercase tracking-[0.16em] text-colombia-red">
+            Atención inmediata
+          </p>
+        </div>
+
+        <h2 id="emergency-title" class="mt-2 text-2xl font-extrabold tracking-tight text-text">
+          Líneas de emergencia
+        </h2>
+
+        <p class="mt-2 max-w-2xl text-sm leading-6 text-muted">
+          Contacta rápidamente los principales servicios de emergencia en Colombia.
+        </p>
+      </div>
+
+      <a
+        href="/emergency"
+        class="text-sm font-bold text-colombia-red transition-colors hover:text-colombia-red/80"
+      >
+        Ver todas las líneas →
+      </a>
+    </div>
+
+    <!-- Líneas -->
+    <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        emergencies.map(({ name, number, description, icon: Icon }) => (
+          <a
+            href={`tel:${number}`}
+            aria-label={`Llamar a ${name}: ${number}`}
+            class="group flex items-center gap-4 rounded-xl border border-border bg-slate-50 p-4 no-underline transition-all duration-200 hover:-translate-y-0.5 hover:border-colombia-red/30 hover:bg-white hover:shadow-sm"
+          >
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-50 text-colombia-red transition-colors duration-200 group-hover:bg-colombia-red group-hover:text-white">
+              <Icon size={19} stroke={1.8} aria-hidden="true" />
+            </span>
+
+            <span class="min-w-0 flex-1">
+              <span class="block text-xs font-semibold text-muted">{name}</span>
+
+              <span class="mt-0.5 block text-xl font-extrabold tracking-tight text-text">
+                {number}
+              </span>
+
+              <span class="mt-0.5 block truncate text-xs text-muted">{description}</span>
+            </span>
+
+            <IconPhone
+              size={17}
+              stroke={2}
+              class="shrink-0 text-colombia-red opacity-0 transition-opacity group-hover:opacity-100"
+              aria-hidden="true"
+            />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

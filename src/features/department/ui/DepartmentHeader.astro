@@ -1,0 +1,90 @@
+---
+import { IconArrowLeft, IconMapPin } from '@tabler/icons-astro'
+
+interface Department {
+  name: string
+  capital: string
+  slug: string
+  status: 'critical' | 'high' | 'moderate' | 'low'
+  municipalities: string[]
+}
+
+interface Props {
+  department: Department
+}
+
+const { department } = Astro.props
+
+const statusConfig = {
+  critical: {
+    label: 'Afectación crítica',
+    className: 'bg-red-50 text-red-700 ring-red-200',
+  },
+  high: {
+    label: 'Afectación alta',
+    className: 'bg-orange-50 text-orange-700 ring-orange-200',
+  },
+  moderate: {
+    label: 'Afectación moderada',
+    className: 'bg-yellow-50 text-yellow-700 ring-yellow-200',
+  },
+  low: {
+    label: 'Seguimiento preventivo',
+    className: 'bg-emerald-50 text-emerald-700 ring-emerald-200',
+  },
+}
+
+const status = statusConfig[department.status]
+---
+
+<header class="border-b border-slate-200 bg-white">
+  <div class="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 text-sm font-bold text-slate-500 transition hover:text-colombia-blue"
+    >
+      <IconArrowLeft size={17} />
+      Volver a departamentos
+    </a>
+
+    <div class="mt-6 flex flex-col gap-5 sm:mt-8 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span
+            class="rounded-full bg-colombia-blue/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-colombia-blue"
+          >
+            Información departamental
+          </span>
+
+          <span class="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-bold text-slate-500">
+            Actualización en curso
+          </span>
+        </div>
+
+        <h1 class="mt-3 text-3xl font-black tracking-tight text-slate-950 sm:text-5xl">
+          {department.name}
+        </h1>
+
+        <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-slate-500">
+          <span class="inline-flex items-center gap-1.5">
+            <IconMapPin size={16} />
+            Capital: {department.capital}
+          </span>
+
+          <span>
+            {department.municipalities.length} municipios bajo seguimiento
+          </span>
+        </div>
+      </div>
+
+      <span
+        class:list={[
+          'w-fit rounded-full px-4 py-2 text-xs font-extrabold ring-1',
+          status.className,
+        ]}
+      >
+        {status.label}
+      </span>
+    </div>
+  </div>
+</header>

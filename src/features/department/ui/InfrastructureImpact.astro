@@ -1,0 +1,165 @@
+---
+import {
+  IconBuilding,
+  IconMedicalCross,
+  IconRoad,
+  IconSchool,
+  IconTruck,
+  IconExternalLink,
+} from '@tabler/icons-astro'
+
+interface Source {
+  name: string
+  url: string
+  type: 'official' | 'media' | 'institutional'
+  publishedAt?: string
+  updatedAt?: string
+}
+
+interface Fact {
+  value: string
+  source?: Source
+  updatedAt?: string
+}
+
+interface Department {
+  buildings: Fact
+  hospitals: Fact
+  schools: Fact
+  roads: Fact
+  services: Fact
+}
+
+interface Props {
+  department: Department
+}
+
+const { department } = Astro.props
+
+const infrastructure = [
+  {
+    title: 'Edificaciones',
+    fact: department.buildings,
+    icon: IconBuilding,
+    iconClass: 'bg-blue-50 text-colombia-blue',
+  },
+  {
+    title: 'Salud',
+    fact: department.hospitals,
+    icon: IconMedicalCross,
+    iconClass: 'bg-red-50 text-colombia-red',
+  },
+  {
+    title: 'Educación',
+    fact: department.schools,
+    icon: IconSchool,
+    iconClass: 'bg-yellow-50 text-[#9A7500]',
+  },
+  {
+    title: 'Vías y transporte',
+    fact: department.roads,
+    icon: IconRoad,
+    iconClass: 'bg-blue-50 text-colombia-blue',
+  },
+  {
+    title: 'Servicios públicos',
+    fact: department.services,
+    icon: IconTruck,
+    iconClass: 'bg-slate-100 text-slate-700',
+  },
+]
+---
+
+<div class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+  <!-- Header -->
+  <div class="border-b border-slate-200 p-5 sm:p-6">
+    <div class="flex items-start gap-3">
+      <div
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-colombia-blue/10"
+      >
+        <IconBuilding
+          size={20}
+          class="text-colombia-blue"
+        />
+      </div>
+
+      <div>
+        <h2 class="text-xl font-black text-slate-950">
+          Impacto e infraestructura
+        </h2>
+
+        <p class="mt-1 text-sm leading-6 text-slate-500">
+          Estado conocido de infraestructura, servicios y sectores prioritarios.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Infrastructure -->
+  <div class="divide-y divide-slate-100">
+    {
+      infrastructure.map((item) => {
+        const Icon = item.icon
+
+        return (
+          <article class="flex gap-4 p-5 sm:p-6">
+            <!-- Icon -->
+            <div
+              class:list={[
+                'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl',
+                item.iconClass,
+              ]}
+            >
+              <Icon size={19} />
+            </div>
+
+            <!-- Content -->
+            <div class="min-w-0 flex-1">
+              <h3 class="font-extrabold text-slate-900">
+                {item.title}
+              </h3>
+
+              <p class="mt-1 text-sm leading-6 text-slate-500">
+                {item.fact.value}
+              </p>
+
+              {
+                item.fact.source && (
+                  <div class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                      Fuente
+                    </span>
+
+                    <span class="text-slate-300">
+                      •
+                    </span>
+
+                    <a
+                      href={item.fact.source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex items-center gap-1 text-[11px] font-bold text-colombia-blue hover:underline"
+                    >
+                      {item.fact.source.name}
+
+                      <IconExternalLink size={12} />
+                    </a>
+                  </div>
+                )
+              }
+
+              {
+                item.fact.updatedAt && (
+                  <p class="mt-1 text-[10px] text-slate-400">
+                    Actualizado: {item.fact.updatedAt}
+                  </p>
+                )
+              }
+            </div>
+          </article>
+        )
+      })
+    }
+  </div>
+</div>
+

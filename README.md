@@ -29,12 +29,14 @@ Esta plataforma **centraliza información crítica** para la respuesta ciudadana
 ## Funcionalidades
 
 ### Información y búsqueda
+
 - **Departamentos organizados** con indicación visual de zonas afectadas prioritarias
 - **Buscador en vivo** — filtra por nombre, ciudad, departamento o tipo de insumo
 - **Página dedicada por departamento** con centros agrupados por ciudad
 - **Guía de insumos** por categoría (medicinas, alimentos, higiene, herramientas…)
 
 ### Reporte y alertas
+
 - **Reporte de necesidades urgentes** por categoría (agua, alimentos, medicinas, rescate, albergue…)
 - **Filtro por estado de necesidad**: crítico / en camino / cubierto
 - **Refugios** disponibles y registro de personas refugiadas
@@ -42,11 +44,13 @@ Esta plataforma **centraliza información crítica** para la respuesta ciudadana
 - **Búsqueda de personas** desaparecidas
 
 ### Participación ciudadana
+
 - **Sugerir centro de acopio** mediante formulario público (requiere moderación)
 - **Sugerir refugio** mediante formulario público
 - **Enlaces de ayuda** con botón "Ver más / Ver menos"
 
 ### Emergencia y robustez
+
 - **Números de emergencia** nacionales y por categoría (bomberos, defensa civil, policía…)
 - **Datos en vivo** desde Supabase con fallback offline automático
 - **Modo offline** — funciona sin conexión usando datos estáticos embebidos
@@ -152,6 +156,7 @@ Este proyecto vive gracias a voluntarios. Toda ayuda suma:
 Si encuentras algo que mejorar o reportar, escribe al equipo de desarrollo — no publiques vulnerabilidades en issues públicos. Para todo lo demás, únete al grupo de WhatsApp o contribuye con código.
 
 ---
+
 <p align="center">
   Hecho con ❤️ por la comunidad colombiana — <strong>Porque cuando la solidaridad nos une, la esperanza se vuelve más fuerte</strong>
   <br><br>

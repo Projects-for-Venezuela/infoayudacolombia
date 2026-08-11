@@ -1,0 +1,95 @@
+---
+import { IconBuildingWarehouse, IconMap, IconMapPin } from '@tabler/icons-astro'
+export interface Props {
+  totalCentros: number
+  totalEstados: number
+  totalCiudades: number
+}
+const { totalCentros, totalEstados, totalCiudades } = Astro.props
+const stats = [
+  {
+    value: totalCentros,
+    label: 'Centros de acopio',
+    icon: IconBuildingWarehouse,
+    color: 'blue',
+    highlight: true,
+  },
+  {
+    value: totalEstados,
+    label: 'Departamentos',
+    icon: IconMap,
+    color: 'yellow',
+  },
+  {
+    value: totalCiudades,
+    label: 'Ciudades',
+    icon: IconMapPin,
+    color: 'red',
+  },
+]
+---
+
+<section aria-label="Estadísticas" class="mx-auto mb-8 w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+  <div class="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+    {
+      stats.map(stat => (
+        <article
+          class:list={[
+            'group relative overflow-hidden rounded-3xl border p-5 sm:p-6',
+            'bg-white',
+            'transition-all duration-300',
+            'hover:-translate-y-1 hover:shadow-lg',
+            stat.highlight
+              ? 'border-colombia-blue/20 hover:border-colombia-blue/40'
+              : 'border-border hover:border-colombia-blue/20',
+          ]}
+        >
+          {/* Color de Colombia */}
+          <div
+            class:list={[
+              'absolute inset-x-0 top-0 h-1',
+              stat.color === 'blue' && 'bg-colombia-blue',
+              stat.color === 'yellow' && 'bg-colombia-yellow',
+              stat.color === 'red' && 'bg-colombia-red',
+            ]}
+            aria-hidden="true"
+          />
+          <div class="flex items-start justify-between gap-4">
+            {/* Información */}
+            <div class="min-w-0">
+              <div
+                class:list={[
+                  'mb-3 flex h-11 w-11 items-center justify-center rounded-2xl',
+                  stat.color === 'blue' && 'bg-colombia-blue/10 text-colombia-blue',
+                  stat.color === 'yellow' && 'bg-colombia-yellow/15 text-[#B88600]',
+                  stat.color === 'red' && 'bg-colombia-red/10 text-colombia-red',
+                ]}
+              >
+                <stat.icon size={22} stroke={2} aria-hidden="true" />
+              </div>
+              <div
+                class:list={[
+                  'text-4xl font-black leading-none tracking-tight tabular-nums sm:text-5xl',
+                  stat.highlight ? 'text-colombia-blue' : 'text-text',
+                ]}
+              >
+                {stat.value}
+              </div>
+              <div class="mt-2 text-sm font-semibold text-muted">{stat.label}</div>
+            </div>
+            {/* Indicador */}
+            <div
+              class:list={[
+                'mt-1 h-2.5 w-2.5 shrink-0 rounded-full',
+                stat.color === 'blue' && 'bg-colombia-blue',
+                stat.color === 'yellow' && 'bg-colombia-yellow',
+                stat.color === 'red' && 'bg-colombia-red',
+              ]}
+              aria-hidden="true"
+            />
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

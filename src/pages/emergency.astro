@@ -1,0 +1,26 @@
+---
+import Layout from '~/layouts/Layout.astro'
+
+import EmergencyHero from '~/features/emergency/ui/EmergencyHero.astro'
+import EmergencyNumbers from '~/features/emergency/ui/EmergencyNumbers.astro'
+import RiskManagement from '~/features/emergency/ui/RiskManagement.astro'
+
+import { emergencyCities, emergencyNumbers } from '~/data/emergency'
+import EmergencyCities from '~/features/emergency/ui/EmergencyCities.astro'
+---
+
+<Layout
+  title="Números de emergencia | Info Ayuda Colombia"
+  description="Números de emergencia y líneas de atención disponibles en Colombia."
+  canonical="https://infoayudacolombia.vercel.app/emergencia"
+>
+  <main>
+    <EmergencyHero />
+
+    <EmergencyNumbers numbers={emergencyNumbers} />
+
+    <EmergencyCities cities={emergencyCities} />
+
+    <RiskManagement />
+  </main>
+</Layout>

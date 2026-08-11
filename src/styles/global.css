@@ -1,119 +1,38 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css';
+@import '@fontsource/poppins/800.css';
 
 @theme {
-  --color-blue: #00247D;
-  --color-blue-dark: #001845;
-  --color-red: #CF142B;
-  --color-red-dark: #A00F22;
-  --color-yellow: #FFCC00;
-  --color-gold: #D4A800;
-  --color-bg: #F4F5F7;
-  --color-card: #FFFFFF;
-  --color-text: #1A1D23;
-  --color-muted: #6B7280;
-  --color-border: #E2E6ED;
-  --color-focus: #FFCC00;
-  --color-amber: #854d0e;
+  /* Tipografía */
+  --font-family-poppins: 'Poppins', sans-serif;
+
+  /* Colombia 🇨🇴 */
+  --color-colombia-yellow: #fcd116;
+  --color-colombia-blue: #003893;
+  --color-colombia-red: #ce1126;
+
+  /* Variantes */
+  --color-blue-dark: #002b70;
+  --color-red-dark: #a80e1f;
+  --color-yellow-dark: #d9ae00;
+
+  /* Interfaz */
+  --color-bg: #f4f5f7;
+  --color-card: #ffffff;
+  --color-text: #1a1d23;
+  --color-muted: #6b7280;
+  --color-border: #e2e6ed;
+  --color-focus: #fcd116;
+
+  /* Estados */
   --color-green: #166534;
+  --color-amber: #854d0e;
+
+  /* Bordes */
   --radius-card: 12px;
   --radius-pill: 9999px;
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-
-@supports (scroll-behavior: smooth) {
-  @media (prefers-reduced-motion: no-preference) {
-    html { scroll-behavior: smooth; }
-  }
-}
-
-:focus { outline: none; }
-:focus-visible {
-  outline: 3px solid var(--color-yellow);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.skip-link {
-  position: absolute;
-  top: -100px;
-  left: 0.5rem;
-  z-index: 999;
-  background: var(--color-blue-dark);
-  color: white;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: top .15s ease;
-}
-.skip-link:focus-visible {
-  top: 0.5rem;
-  outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-body {
-  font-family: var(--font-sans);
-  background: var(--color-bg);
-  color: var(--color-text);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
-main {
-  flex: 1;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 1.5rem 1.25rem;
-  width: 100%;
-}
-@media (max-width: 768px) {
-  main { padding: 1rem 0.75rem calc(56px + 1rem); }
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-.animate-spin { animation: spin 1s linear infinite; }
-
-@keyframes nec-pulse {
-  0%, 100% { box-shadow: 0 2px 6px rgba(207,20,43,0.3); }
-  50% { box-shadow: 0 2px 12px rgba(207,20,43,0.5); }
-}
-
-@keyframes accordion-down {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-spin { animation: none; }
 }

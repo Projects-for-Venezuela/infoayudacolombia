@@ -1,0 +1,93 @@
+---
+import { IconMapPin, IconTruck } from '@tabler/icons-astro'
+
+interface Center {
+  name: string
+  city: string
+  address: string
+  status: 'active' | string
+  accepts: string[]
+}
+
+interface Props {
+  department: {
+    centers: Center[]
+  }
+}
+
+const { department } = Astro.props
+---
+
+<section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+  <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div class="border-b border-slate-200 p-5 sm:p-6">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <div class="flex items-center gap-2">
+            <IconTruck size={20} class="text-colombia-blue" />
+
+            <h2 class="text-xl font-black text-slate-950">Centros de acopio</h2>
+          </div>
+
+          <p class="mt-1 text-sm text-slate-500">
+            Puntos destinados a recibir ayudas para las comunidades.
+          </p>
+        </div>
+
+        <span
+          class="w-fit rounded-full bg-slate-100 px-3 py-1.5 text-[11px] font-bold text-slate-500"
+        >
+          Información manual
+        </span>
+      </div>
+    </div>
+
+    <div class="grid gap-4 p-5 sm:p-6 md:grid-cols-2">
+      {
+        department.centers.map(center => (
+          <article class="rounded-xl border border-slate-200 p-5 transition hover:border-colombia-blue/30 hover:shadow-sm">
+            <div class="flex items-start justify-between gap-4">
+              <div class="min-w-0">
+                <h3 class="font-extrabold text-slate-950">{center.name}</h3>
+
+                <div class="mt-2 flex items-center gap-1.5 text-sm text-slate-500">
+                  <IconMapPin size={15} />
+                  <span>{center.city}</span>
+                </div>
+              </div>
+
+              <span
+                class:list={[
+                  'shrink-0 rounded-full px-2.5 py-1 text-[10px] font-extrabold',
+                  center.status === 'active'
+                    ? 'bg-emerald-50 text-emerald-700'
+                    : 'bg-yellow-50 text-yellow-700',
+                ]}
+              >
+                {center.status === 'active' ? 'Habilitado' : 'Por verificar'}
+              </span>
+            </div>
+
+            <div class="mt-5 rounded-xl bg-slate-50 p-4">
+              <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Dirección</p>
+
+              <p class="mt-1 text-sm font-semibold text-slate-700">{center.address}</p>
+            </div>
+
+            <div class="mt-5">
+              <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Recibe</p>
+
+              <div class="mt-2 flex flex-wrap gap-2">
+                {center.accepts.map(item => (
+                  <span class="rounded-lg bg-colombia-blue/10 px-2.5 py-1.5 text-[11px] font-bold text-colombia-blue">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

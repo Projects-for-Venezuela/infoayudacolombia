@@ -1,0 +1,65 @@
+---
+import { IconShieldCheck } from '@tabler/icons-astro'
+
+interface Department {
+  municipalities: string[]
+  needs: string[]
+}
+
+interface Props {
+  department: Department
+}
+
+const { department } = Astro.props
+---
+
+<aside class="space-y-5">
+  <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+    <div class="flex items-center justify-between gap-3">
+      <div>
+        <h2 class="font-black text-slate-950">Municipios</h2>
+
+        <p class="mt-1 text-xs text-slate-500">Zonas bajo seguimiento</p>
+      </div>
+
+      <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-extrabold text-slate-600">
+        {department.municipalities.length}
+      </span>
+    </div>
+
+    <div class="mt-5 flex flex-wrap gap-2">
+      {
+        department.municipalities.map(city => (
+          <span class="rounded-lg bg-slate-100 px-3 py-2 text-xs font-bold text-slate-700">
+            {city}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="rounded-2xl border border-red-100 bg-white p-5 shadow-sm sm:p-6">
+    <div class="flex items-start gap-3">
+      <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-50">
+        <IconShieldCheck size={20} class="text-colombia-red" />
+      </div>
+
+      <div>
+        <h2 class="font-black text-slate-950">Necesidades prioritarias</h2>
+
+        <p class="mt-1 text-xs text-slate-500">Elementos requeridos</p>
+      </div>
+    </div>
+
+    <ul class="mt-5 space-y-3">
+      {
+        department.needs.map(need => (
+          <li class="flex items-start gap-2.5 text-sm text-slate-600">
+            <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-colombia-red" />
+            <span>{need}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</aside>

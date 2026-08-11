@@ -1,0 +1,57 @@
+---
+import DepartmentLayout from '~/layouts/DepartmentLayout.astro'
+
+import { departmentList, earthquake } from '~/data/departments'
+
+import DepartmentHeader from '~/features/department/ui/DepartmentHeader.astro'
+import EarthquakeSummary from '~/features/department/ui/EarthquakeSummary.astro'
+import ImpactSummary from '~/features/department/ui/ImpactSummary.astro'
+import InfrastructureImpact from '~/features/department/ui/InfrastructureImpact.astro'
+import DepartmentSidebar from '~/features/department/ui/DepartmentSidebar.astro'
+import CollectionCenters from '~/features/department/ui/CollectionCenters.astro'
+import UpdateNotice from '~/features/department/ui/UpdateNotice.astro'
+
+export const prerender = true
+
+export function getStaticPaths() {
+  return departmentList.map((department) => ({
+    params: {
+      state: department.slug,
+    },
+    props: {
+      department,
+    },
+  }))
+}
+
+const { department } = Astro.props
+---
+
+<DepartmentLayout
+  title={department.name}
+  description={`Información sobre la emergencia sísmica y ayuda humanitaria en ${department.name}.`}
+>
+  <div class="min-h-screen bg-slate-50">
+    <DepartmentHeader department={department} />
+
+    <EarthquakeSummary
+      department={department}
+      earthquake={earthquake}
+    />
+<!-- 
+    <ImpactSummary department={department} />
+
+    <section class="mx-auto max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
+      <div class="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px]">
+        <InfrastructureImpact department={department} />
+
+        <DepartmentSidebar department={department} />
+      </div>
+    </section>
+
+    <CollectionCenters department={department} />
+
+    <UpdateNotice update={earthquake.update} /> -->
+  </div>
+</DepartmentLayout>
+
