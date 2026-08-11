@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro'
 
-export const prerender = false
+export const prerender = true
 
 const USGS_API_URL = 'https://earthquake.usgs.gov/fdsnws/event/1/query'
 
