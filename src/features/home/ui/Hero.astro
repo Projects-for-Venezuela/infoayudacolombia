@@ -1,0 +1,74 @@
+---
+import { IconArrowRight, IconPhone, IconSearch } from '@tabler/icons-astro'
+---
+
+<header
+  class="relative overflow-hidden bg-linear-to-br from-colombia-blue via-colombia-blue-dark to-[#001030] px-5 py-12 text-white sm:px-6 sm:py-16 md:py-20"
+>
+  <div class="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center">
+    <!-- Etiqueta -->
+    <div
+      class="mb-4 inline-flex items-center gap-2 rounded-full border border-colombia-yellow/20 bg-colombia-yellow/10 px-3 py-1.5"
+    >
+      <span class="h-1.5 w-1.5 rounded-full bg-colombia-yellow" aria-hidden="true"></span>
+
+      <span
+        class="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-colombia-yellow sm:text-xs"
+      >
+        Directorio de ayuda humanitaria
+      </span>
+    </div>
+
+    <!-- Título -->
+    <h1
+      class="mb-4 text-balance text-[1.9rem] font-extrabold leading-[1.08] tracking-tight sm:text-4xl md:text-5xl"
+    >
+      Info <span class="text-colombia-yellow">Ayuda</span> Colombia
+    </h1>
+
+    <!-- Descripción -->
+    <p class="mb-8 max-w-xl text-balance text-sm leading-relaxed text-white/70 sm:text-base">
+      Encuentra centros de acopio, refugios, necesidades y números de emergencia para las personas
+      afectadas por el sismo del
+      <strong class="whitespace-nowrap font-semibold text-white"> 10 de agosto de 2026 </strong>.
+    </p>
+
+    <!-- Acciones -->
+    <div class="flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
+      <!-- Centros de acopio -->
+      <a
+        href="#gridTitle"
+        class="group inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border-2 border-colombia-yellow bg-colombia-yellow px-6 py-3.5 text-sm font-bold text-colombia-blue-dark no-underline shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:bg-[#F5C200] hover:shadow-[0_8px_24px_rgba(255,204,0,0.25)]"
+      >
+        <IconSearch size={18} stroke={2.5} aria-hidden="true" />
+
+        <span>Buscar centros de acopio</span>
+
+        <IconArrowRight
+          size={16}
+          stroke={2.5}
+          aria-hidden="true"
+          class="transition-transform duration-150 group-hover:translate-x-0.5"
+        />
+      </a>
+
+      <!-- Emergencias -->
+      <a
+        href="/emergency"
+        class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border-2 border-white/20 bg-white/10 px-6 py-3.5 text-sm font-bold text-white no-underline backdrop-blur-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-white/35 hover:bg-white/15"
+      >
+        <IconPhone size={18} stroke={2.5} aria-hidden="true" />
+
+        <span>Números de emergencia</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Bandera de Colombia -->
+
+  <div class="absolute inset-x-0 bottom-0 flex h-1" aria-hidden="true">
+    <span class="flex-[2] bg-colombia-yellow"></span>
+    <span class="flex-1 bg-colombia-blue"></span>
+    <span class="flex-1 bg-colombia-red"></span>
+  </div>
+</header>

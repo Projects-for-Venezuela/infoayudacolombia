@@ -1,0 +1,246 @@
+---
+import { IconClock, IconExternalLink, IconX } from '@tabler/icons-astro'
+---
+
+<div
+  id="earthquakeAlert"
+  class="hidden w-full -translate-y-2 overflow-hidden rounded-2xl bg-gradient-to-r from-colombia-red to-red-dark text-white opacity-0 shadow-lg shadow-colombia-red/25 transition-[opacity,transform] duration-300 ease-out data-[visible=true]:translate-y-0 data-[visible=true]:opacity-100 motion-reduce:transition-none"
+  role="status"
+  aria-live="polite"
+  hidden
+>
+  <div class="flex min-h-[58px] items-center gap-2 px-2 sm:min-h-[62px] sm:px-2.5">
+    <!-- Magnitude -->
+    <div
+      class="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl bg-black/20 sm:h-13 sm:w-13"
+    >
+      <span
+        id="earthquakeMagnitude"
+        class="tabular-nums text-lg font-extrabold leading-none sm:text-xl"></span>
+
+      <span class="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.1em] text-white/70">
+        Mw
+      </span>
+    </div>
+
+    <!-- Status -->
+    <div class="hidden shrink-0 items-center gap-2 px-1 sm:flex sm:px-2" aria-hidden="true">
+      <span class="relative flex h-2.5 w-2.5">
+        <span
+          class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-70 motion-reduce:animate-none"
+        ></span>
+
+        <span class="relative h-2.5 w-2.5 rounded-full bg-white"></span>
+      </span>
+
+      <span
+        class="whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.12em] text-white/80"
+      >
+        Earthquake
+      </span>
+    </div>
+
+    <!-- Information -->
+    <div class="min-w-0 flex-1 py-1">
+      <div class="flex min-w-0 items-center gap-2">
+        <span id="earthquakeLocation" class="truncate text-[12px] font-bold sm:text-[13px]"></span>
+
+        <span
+          id="earthquakeDetails"
+          class="hidden shrink-0 whitespace-nowrap text-[11px] font-medium text-white/75 md:inline"
+        ></span>
+      </div>
+
+      <!-- Mobile time -->
+      <div class="mt-0.5 flex items-center gap-1.5 sm:hidden">
+        <IconClock size={12} stroke={2} aria-hidden="true" />
+
+        <span id="earthquakeTimeMobile" class="text-[10px] font-medium text-white/70"></span>
+      </div>
+    </div>
+
+    <!-- Desktop time -->
+    <div class="hidden shrink-0 items-center gap-1.5 border-l border-white/20 pl-3 pr-1 sm:flex">
+      <IconClock size={14} stroke={2} aria-hidden="true" />
+
+      <span id="earthquakeTime" class="whitespace-nowrap text-[11px] font-semibold"></span>
+    </div>
+
+    <!-- USGS -->
+    <a
+      id="earthquakeLink"
+      href="#"
+      class="flex h-9 shrink-0 items-center gap-1.5 rounded-xl bg-white/15 px-2.5 text-[11px] font-bold text-white no-underline transition-colors duration-200 hover:bg-white/25 sm:h-10 sm:px-3 sm:text-[12px]"
+    >
+      <span>USGS</span>
+
+      <IconExternalLink size={13} stroke={2.2} aria-hidden="true" />
+    </a>
+
+    <!-- Close -->
+    <button
+      id="earthquakeClose"
+      type="button"
+      class="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-xl border-0 bg-transparent text-white transition-colors duration-200 hover:bg-white/20 sm:h-10 sm:w-10"
+      aria-label="Close earthquake alert"
+    >
+      <IconX size={16} stroke={2.4} aria-hidden="true" />
+    </button>
+  </div>
+</div>
+
+<script>
+  const DISMISS_KEY = 'earthquakeAlertDismissed'
+
+  interface Earthquake {
+    magnitude: number
+    location: string | null
+    time: number
+    url: string
+    depth: number | null
+  }
+
+  interface EarthquakeResponse {
+    count: number
+    strongest: Earthquake | null
+    earthquakes: Earthquake[]
+  }
+
+  function getRelativeTime(timestamp: number): string {
+    const difference = Date.now() - timestamp
+
+    if (difference < 0) return 'now'
+
+    const minutes = Math.round(difference / 60000)
+
+    if (minutes < 1) return 'just now'
+    if (minutes < 60) return `${minutes} min ago`
+
+    const hours = Math.round(minutes / 60)
+
+    if (hours < 24) return `${hours} h ago`
+
+    return `${Math.round(hours / 24)} d ago`
+  }
+
+  function showAlert(alert: HTMLElement) {
+    alert.hidden = false
+    alert.classList.remove('hidden')
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        alert.setAttribute('data-visible', 'true')
+      })
+    })
+  }
+
+  function hideAlert(alert: HTMLElement) {
+    alert.removeAttribute('data-visible')
+
+    const handleTransitionEnd = (event: TransitionEvent) => {
+      if (event.propertyName !== 'opacity') return
+
+      alert.hidden = true
+      alert.classList.add('hidden')
+      alert.removeEventListener('transitionend', handleTransitionEnd)
+    }
+
+    alert.addEventListener('transitionend', handleTransitionEnd)
+
+    // Fallback por si el navegador no dispara transitionend.
+    setTimeout(() => {
+      if (!alert.hasAttribute('data-visible')) {
+        alert.hidden = true
+        alert.classList.add('hidden')
+        alert.removeEventListener('transitionend', handleTransitionEnd)
+      }
+    }, 350)
+  }
+
+  async function loadEarthquakeAlert() {
+    const alert = document.getElementById('earthquakeAlert')
+    const magnitude = document.getElementById('earthquakeMagnitude')
+    const location = document.getElementById('earthquakeLocation')
+    const details = document.getElementById('earthquakeDetails')
+    const time = document.getElementById('earthquakeTime')
+    const mobileTime = document.getElementById('earthquakeTimeMobile')
+    const link = document.getElementById('earthquakeLink') as HTMLAnchorElement | null
+    const closeButton = document.getElementById('earthquakeClose')
+
+    if (
+      !alert ||
+      !magnitude ||
+      !location ||
+      !details ||
+      !time ||
+      !mobileTime ||
+      !link ||
+      !closeButton
+    ) {
+      return
+    }
+
+    if (sessionStorage.getItem(DISMISS_KEY) === '1') {
+      return
+    }
+
+    try {
+      const response = await fetch('/api/earthquakes.json')
+
+      if (!response.ok) return
+
+      const data: EarthquakeResponse = await response.json()
+
+      if (!data.strongest || data.strongest.magnitude <= 4.0) {
+        return
+      }
+
+      const earthquake = data.strongest
+
+      magnitude.textContent = earthquake.magnitude.toFixed(1)
+
+      location.textContent = earthquake.location || 'Near Colombia'
+
+      const information: string[] = []
+
+      if (typeof earthquake.depth === 'number') {
+        information.push(`${Math.round(earthquake.depth)} km deep`)
+      }
+
+      if (typeof earthquake.time === 'number') {
+        const localTime = new Date(earthquake.time).toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+        })
+
+        information.push(`${localTime} local`)
+
+        const relativeTime = getRelativeTime(earthquake.time)
+
+        time.textContent = relativeTime
+        mobileTime.textContent = relativeTime
+      }
+
+      details.textContent = information.length ? `· ${information.join(' · ')}` : ''
+
+      link.href = earthquake.url
+      link.target = '_blank'
+      link.rel = 'noopener noreferrer'
+
+      showAlert(alert)
+
+      closeButton.addEventListener('click', () => {
+        sessionStorage.setItem(DISMISS_KEY, '1')
+        hideAlert(alert)
+      })
+    } catch {
+      // Ignore API errors.
+    }
+  }
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadEarthquakeAlert)
+  } else {
+    setTimeout(loadEarthquakeAlert, 200)
+  }
+</script>

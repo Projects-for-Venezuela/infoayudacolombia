@@ -1,0 +1,76 @@
+---
+import { IconArrowUpRight } from '@tabler/icons-astro'
+
+import type { EmergencyNumber } from '~/data/emergency'
+
+interface Props {
+  numbers: EmergencyNumber[]
+}
+
+const { numbers } = Astro.props
+---
+
+<section class="bg-slate-50">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+    <div class="mb-8 max-w-2xl">
+      <p class="text-xs font-bold uppercase tracking-widest text-colombia-blue">
+        Líneas nacionales
+      </p>
+
+      <h2 class="mt-2 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">
+        Números de emergencia
+      </h2>
+
+      <p class="mt-3 text-sm leading-6 text-slate-500">
+        Líneas disponibles en Colombia para solicitar ayuda ante una emergencia.
+      </p>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        numbers.map(emergency => {
+          const Icon = emergency.icon
+
+          return (
+            <a
+              href={emergency.href}
+              class:list={[
+                'group rounded-2xl border bg-white p-5 transition-all duration-200',
+                emergency.featured
+                  ? 'border-colombia-blue/30 ring-1 ring-colombia-blue/10'
+                  : 'border-slate-200 hover:border-colombia-blue/30 hover:shadow-sm',
+              ]}
+            >
+              <div class="flex items-start justify-between gap-4">
+                <div
+                  class:list={[
+                    'flex h-11 w-11 items-center justify-center rounded-xl',
+                    emergency.featured
+                      ? 'bg-colombia-blue text-white'
+                      : 'bg-colombia-blue/10 text-colombia-blue',
+                  ]}
+                >
+                  <Icon size={21} stroke={1.8} />
+                </div>
+
+                <IconArrowUpRight
+                  size={18}
+                  stroke={1.8}
+                  class="text-slate-300 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-colombia-blue"
+                />
+              </div>
+
+              <p class="mt-5 text-2xl font-black tracking-tight text-slate-950">
+                {emergency.number}
+              </p>
+
+              <h3 class="mt-1 text-sm font-black text-slate-900">{emergency.name}</h3>
+
+              <p class="mt-2 text-sm leading-6 text-slate-500">{emergency.description}</p>
+            </a>
+          )
+        })
+      }
+    </div>
+  </div>
+</section>

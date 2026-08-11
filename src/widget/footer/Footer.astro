@@ -1,0 +1,127 @@
+---
+import {
+  IconHeart,
+  IconPhone,
+  IconHome,
+  IconAlertTriangle,
+  IconInfoCircle,
+} from '@tabler/icons-astro'
+const footerLinks = [
+  { label: 'Inicio', href: '/', icon: IconHome },
+  { label: 'Necesidades', href: '/necesidades', icon: IconAlertTriangle },
+  { label: 'Sobre nosotros', href: '/sobre-nosotros', icon: IconInfoCircle },
+]
+const emergency = { label: 'Emergencia', href: '/emergencia', icon: IconPhone }
+---
+
+<footer class="mt-auto bg-[#0F172A] text-white">
+  <!-- Franja Colombia -->
+  <div class="flex h-1.5 w-full" aria-hidden="true">
+    <span class="flex-[2] bg-colombia-yellow"></span>
+    <span class="flex-1 bg-colombia-blue"></span>
+    <span class="flex-1 bg-colombia-red"></span>
+  </div>
+  <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <!-- Contenido principal -->
+    <div
+      class="flex flex-col gap-8 border-b border-white/10 pb-8 md:flex-row md:items-start md:justify-between"
+    >
+      <!-- Marca -->
+      <div class="max-w-sm">
+        <a
+          href="/"
+          class="inline-flex items-center gap-3 no-underline"
+          aria-label="Info Ayuda Colombia - Inicio"
+        >
+          <div
+            class="flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl bg-colombia-blue shadow-sm"
+          >
+            <img
+              src="/favicon.ico"
+              alt=""
+              width="40"
+              height="40"
+              class="h-full w-full object-cover"
+            />
+          </div>
+          <div>
+            <span class="block text-sm font-extrabold tracking-tight text-white"> Info Ayuda </span>
+            <span
+              class="block text-[10px] font-bold uppercase tracking-[0.14em] text-colombia-yellow"
+            >
+              Colombia
+            </span>
+          </div>
+        </a>
+        <p class="mt-4 text-sm leading-6 text-white/50">
+          Información centralizada para encontrar ayuda, recursos, refugios y necesidades de la
+          comunidad colombiana.
+        </p>
+      </div>
+      <!-- Navegación -->
+      <nav aria-label="Enlaces del pie de página">
+        <p class="mb-3 text-xs font-bold uppercase tracking-wider text-white/30">Información</p>
+        <div class="flex flex-col gap-2">
+          {
+            footerLinks.map(({ label, href, icon: Icon }) => (
+              <a
+                href={href}
+                class="group inline-flex items-center gap-2 text-sm text-white/55 no-underline transition-colors duration-150 hover:text-white"
+              >
+                <Icon
+                  size={16}
+                  stroke={1.8}
+                  aria-hidden="true"
+                  class="text-white/30 transition-colors group-hover:text-colombia-yellow"
+                />
+                <span>{label}</span>
+              </a>
+            ))
+          }
+        </div>
+      </nav>
+      <!-- Emergencia -->
+      <div class="md:min-w-[210px]">
+        <p class="mb-3 text-xs font-bold uppercase tracking-wider text-white/30">Atención</p>
+        <a
+          href={emergency.href}
+          class="group flex items-center gap-3 rounded-xl border border-colombia-red/30 bg-colombia-red/10 p-3 no-underline transition-colors duration-150 hover:border-colombia-red/50 hover:bg-colombia-red/20"
+        >
+          <span
+            class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-colombia-red text-white"
+          >
+            <IconPhone size={18} stroke={2} aria-hidden="true" />
+          </span>
+          <span>
+            <span class="block text-sm font-bold text-white"> Emergencia </span>
+            <span class="block text-xs text-white/50"> Números y ayuda inmediata </span>
+          </span>
+        </a>
+      </div>
+    </div>
+    <!-- Información del proyecto -->
+    <div class="border-b border-white/10 py-6">
+      <p class="mx-auto max-w-3xl text-center text-xs leading-5 text-white/35">
+        Info Ayuda Colombia es una plataforma comunitaria que centraliza información útil sobre
+        centros de acopio, necesidades, refugios y recursos disponibles.
+      </p>
+    </div>
+    <!-- Pie -->
+    <div class="flex flex-col items-center justify-between gap-3 pt-6 text-xs sm:flex-row">
+      <p class="text-center text-white/30 sm:text-left">
+        © {new Date().getFullYear()} Info Ayuda Colombia. Información para la comunidad.
+      </p>
+      <div class="flex items-center gap-1.5 text-white/30">
+        <span>Hecho con</span>
+        <IconHeart
+          size={13}
+          stroke={2}
+          fill="currentColor"
+          class="text-colombia-red"
+          aria-hidden="true"
+        />
+        <span>por la comunidad colombiana</span>
+      </div>
+    </div>
+  </div>
+</footer>

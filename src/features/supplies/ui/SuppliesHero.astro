@@ -1,0 +1,43 @@
+---
+import { IconAlertTriangle } from '@tabler/icons-astro'
+---
+
+<section class="border-b border-slate-200 bg-white">
+  <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+    <div class="max-w-3xl">
+      <span
+        class="inline-flex rounded-full bg-colombia-blue/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-colombia-blue"
+      >
+        Guía de donaciones
+      </span>
+
+      <h1 class="mt-4 text-3xl font-black tracking-tight text-slate-950 sm:text-5xl">
+        Insumos necesarios
+      </h1>
+
+      <p class="mt-4 max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
+        Elementos que pueden ser solicitados para apoyar a las personas afectadas. Consulta esta
+        guía antes de preparar tu donación.
+      </p>
+    </div>
+
+    <div
+      class="mt-8 flex gap-4 rounded-2xl border border-colombia-yellow/30 bg-colombia-yellow/10 p-5"
+    >
+      <div
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-colombia-yellow/20 text-colombia-yellow"
+      >
+        <IconAlertTriangle size={21} stroke={1.8} />
+      </div>
+
+      <div>
+        <h2 class="font-extrabold text-slate-950">Antes de donar</h2>
+
+        <p class="mt-1 text-sm leading-6 text-slate-600">
+          Verifica con el centro de acopio más cercano qué insumos está recibiendo actualmente. Las
+          necesidades pueden cambiar según la situación de cada comunidad.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
